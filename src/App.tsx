@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import ItemList from './components/ItemList';
-import AddItem from './components/AddItem';
+import App from './components';
 
 // DOM出力
-ReactDom.render(<AddItem />, document.getElementById('content'));
+ReactDom.render(
+    <>
+        <App />
+    </>,
+    document.getElementById('content'),
+);

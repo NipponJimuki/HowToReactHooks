@@ -6,7 +6,7 @@ type Props = {
 };
 
 function DisplayState({ power }: Props) {
-    return <div>{power ? 'ON' : 'OFF'}</div>;
+    return <div style={{ width: '45px' }}>{power ? 'ON' : 'OFF'}</div>;
 }
 
 export default DisplayState;
