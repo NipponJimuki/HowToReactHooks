@@ -1,6 +1,3 @@
-/* DEPRECATED */
-/* React 16.7.0-alpha.2からReact Hooksの型が追加された */
-/* 何か不具合があって動かない場合はこちらの型をお使いください */
 import React from 'react';
 
 export const useState: <T>(t: T) => [T, (prev: T | ((t: T) => T)) => void] = (React as any)
