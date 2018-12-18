@@ -39,7 +39,7 @@ const reducer = (state: State, action: Action): State => {
                 items: [
                     ...state.items,
                     {
-                        id: `cele-index-${state.items.length}`,
+                        id: `item-index-${state.items.length}`,
                         name: action.payload,
                         power: false,
                     },
@@ -53,11 +53,12 @@ const reducer = (state: State, action: Action): State => {
             };
         }
         case CHANGE_POWER_STATE: {
+            const { items } = state;
+            items[action.payload].power = !items[action.payload].power;
+
             return {
                 ...state,
-                items: state.items.map((cele, index) =>
-                    index === action.payload ? { ...cele, power: !cele.power } : cele,
-                ),
+                items,
             };
         }
 

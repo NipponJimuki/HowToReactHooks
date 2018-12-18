@@ -3,9 +3,4 @@ import ReactDom from 'react-dom';
 import App from './components';
 
 // DOM出力
-ReactDom.render(
-    <>
-        <App />
-    </>,
-    document.getElementById('content'),
-);
+ReactDom.render(<App />, document.getElementById('content'));

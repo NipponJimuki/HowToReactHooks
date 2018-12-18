@@ -1,21 +1,17 @@
 // components/indes.tsx
-import React from 'react';
-import { useReducer, useMemo, useCallback } from './reactHooksAPI';
+import React, { useReducer, useMemo } from 'react';
 import reducer, { initialState, addItem, reset, changePowerState } from './reducer';
 import AddItem from './AddItem';
 import ItemList from './ItemList';
 
 function App() {
     const [{ items }, dispatch] = useReducer(reducer, initialState);
+    const disabled = useMemo(() => items.length >= 5, [items]);
     const onAddItem = (item: string) => dispatch(addItem(item));
+    const onReset = () => {
+        if (disabled) dispatch(reset());
+    };
     const onChangePower = (index: number) => () => dispatch(changePowerState(index));
-    const disabled = useMemo<boolean>(() => items.length >= 5, [items]);
-    const onReset = useCallback(
-        () => {
-            if (disabled) dispatch(reset());
-        },
-        [disabled],
-    );
 
     return (
         <>

@@ -1,6 +1,5 @@
 // components/AddItem/index.tsx
-import React from 'react';
-import { useState, useEffect, useRef } from '../reactHooksAPI';
+import React, { useState, useEffect, useRef } from 'react';
 
 type Props = {
     onAdd: (value: string) => void;
@@ -12,24 +11,25 @@ function AddItem({ onAdd, onReset, disabled }: Props) {
     const [textValue, handleChange] = useState('');
     const inputEl = useRef<HTMLInputElement>(null);
     const reset = () => handleChange('');
-    const onEnter = (e: KeyboardEvent) => {
-        if (e.keyCode === 13 && inputEl.current) {
-            const item = inputEl.current.defaultValue;
-            if (item) {
-                onAdd(item);
-                reset();
-            }
-        }
-    };
 
     useEffect(
         () => {
+            const onEnter = (e: KeyboardEvent) => {
+                if (e.keyCode === 13 && inputEl.current) {
+                    const item = inputEl.current.value;
+                    if (item) {
+                        onAdd(item);
+                        handleChange('');
+                    }
+                }
+            };
+
             window.addEventListener('keydown', onEnter);
             if (inputEl.current) {
                 inputEl.current.focus();
             }
             return () => {
-                handleChange('');
+                reset();
                 window.removeEventListener('keydown', onEnter);
             };
         },
@@ -46,7 +46,7 @@ function AddItem({ onAdd, onReset, disabled }: Props) {
     };
 
     return (
-        <div>
+        <>
             <input
                 ref={inputEl}
                 type="text"
@@ -58,7 +58,7 @@ function AddItem({ onAdd, onReset, disabled }: Props) {
                 追加
             </button>
             {disabled && <button onClick={onReset}>リセット</button>}
-        </div>
+        </>
     );
 }
 

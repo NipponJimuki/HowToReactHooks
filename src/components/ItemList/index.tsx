@@ -27,6 +27,7 @@ function ItemList({ items, onClick }: Props) {
 const List = styled.div`
     width: 100%;
     display: flex;
+    flex-wrap: nowrap;
     color: rgb(100, 100, 100);
     padding-bottom: 1rem;
     margin-bottom: 2rem;
@@ -34,7 +35,9 @@ const List = styled.div`
 `;
 const Item = styled.div`
     font-size: 3rem;
-    width: 30%;
+    width: 50%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 `;
 List.displayName = 'List';
 Item.displayName = 'Item';
