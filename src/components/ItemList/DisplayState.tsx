@@ -9,4 +9,4 @@ function DisplayState({ power }: Props) {
     return <div style={{ width: '45px' }}>{power ? 'ON' : 'OFF'}</div>;
 }
 
-export default DisplayState;
+export default React.memo(DisplayState);

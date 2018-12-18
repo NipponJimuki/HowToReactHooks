@@ -9,4 +9,4 @@ function Switch({ onClick }: Props) {
     return <button onClick={onClick}>スイッチ</button>;
 }
 
-export default Switch;
+export default React.memo(Switch);

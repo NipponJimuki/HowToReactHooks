@@ -1,23 +1,26 @@
 // components/ItemList/index.tsx
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
+import Item from './Item';
 import Switch from './Switch';
 import DisplayState from './DisplayState';
 import { ItemProps } from '../reducer';
 
 type Props = {
-    onClick: (index: number) => () => void;
+    onClick: (index: number) => void;
     items: ItemProps[];
 };
 
 function ItemList({ items, onClick }: Props) {
+    const _onClick = (index: number) => useCallback(() => onClick(index), [index]);
+
     return (
         <>
             {items.map(({ id, name, power }, index) => (
                 <List key={id}>
                     <Item>{name}</Item>
                     <DisplayState power={power} />
-                    <Switch onClick={onClick(index)} />
+                    <Switch onClick={_onClick(index)} />
                 </List>
             ))}
         </>
@@ -33,13 +36,6 @@ const List = styled.div`
     margin-bottom: 2rem;
     border-bottom: 1px solid rgb(100, 100, 100);
 `;
-const Item = styled.div`
-    font-size: 3rem;
-    width: 50%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-`;
 List.displayName = 'List';
-Item.displayName = 'Item';
 
 export default ItemList;

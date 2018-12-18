@@ -62,4 +62,4 @@ function AddItem({ onAdd, onReset, disabled }: Props) {
     );
 }
 
-export default AddItem;
+export default React.memo(AddItem);
