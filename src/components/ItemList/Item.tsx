@@ -2,16 +2,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function ItemName(props: { children: string }) {
-    return <Item>{props.children}</Item>;
+function Item({ children }: { children: string }) {
+    return <Container>{children}</Container>;
 }
 
-const Item = styled.div`
+const Container = styled.div`
     font-size: 3rem;
     width: 50%;
     text-overflow: ellipsis;
     white-space: nowrap;
 `;
-Item.displayName = 'Item';
+Container.displayName = 'Container';
 
-export default React.memo(ItemName);
+export default React.memo(Item);

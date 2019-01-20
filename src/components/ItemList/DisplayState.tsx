@@ -5,8 +5,12 @@ type Props = {
     power: boolean;
 };
 
+const styles = {
+    width: '45px',
+};
+
 function DisplayState({ power }: Props) {
-    return <div style={{ width: '45px' }}>{power ? 'ON' : 'OFF'}</div>;
+    return <div style={styles}>{power ? 'ON' : 'OFF'}</div>;
 }
 
 export default React.memo(DisplayState);

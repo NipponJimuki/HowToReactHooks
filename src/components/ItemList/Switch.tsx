@@ -1,5 +1,5 @@
 // components/ItemList/Switch.tsx
-import React, { useCallback } from 'react';
+import React from 'react';
 
 type Props = {
     onClick: () => void;

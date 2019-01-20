@@ -25,7 +25,7 @@ export interface ItemProps {
 type State = {
     items: ItemProps[];
 };
-type Action = ReturnType<typeof addItem | typeof reset | typeof changePowerState>;
+export type Action = ReturnType<typeof addItem | typeof reset | typeof changePowerState>;
 
 export const initialState = {
     items: [],

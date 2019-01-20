@@ -1,18 +1,20 @@
 // components/ItemList/index.tsx
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import styled from 'styled-components';
 import Item from './Item';
 import Switch from './Switch';
 import DisplayState from './DisplayState';
-import { ItemProps } from '../reducer';
+import { ItemsContenxt } from '../';
+import { changePowerState, ItemProps } from '../reducer';
 
 type Props = {
-    onClick: (index: number) => void;
     items: ItemProps[];
 };
 
-function ItemList({ items, onClick }: Props) {
-    const _onClick = (index: number) => useCallback(() => onClick(index), [index]);
+function ItemList({ items }: Props) {
+    const dispatch = useContext(ItemsContenxt);
+    const _onClick = (index: number) =>
+        useCallback(() => dispatch(changePowerState(index)), [index]);
 
     return (
         <>
