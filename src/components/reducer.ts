@@ -2,19 +2,22 @@ export const ADD_ITEM = 'ADD_ITEM';
 export const RESET = 'RESET';
 export const CHANGE_POWER_STATE = 'CHANGE_POWER_STATE';
 
-export const addItem = (payload: string) => ({
-    type: ADD_ITEM as typeof ADD_ITEM,
-    payload,
-});
+export const addItem = (payload: string) =>
+    ({
+        type: ADD_ITEM,
+        payload,
+    } as const);
 
-export const reset = () => ({
-    type: RESET as typeof RESET,
-});
+export const reset = () =>
+    ({
+        type: RESET,
+    } as const);
 
-export const changePowerState = (payload: number) => ({
-    type: CHANGE_POWER_STATE as typeof CHANGE_POWER_STATE,
-    payload,
-});
+export const changePowerState = (payload: number) =>
+    ({
+        type: CHANGE_POWER_STATE,
+        payload,
+    } as const);
 
 export interface ItemProps {
     id: string;
