@@ -13,8 +13,7 @@ type Props = {
 
 function ItemList({ items }: Props) {
     const dispatch = useContext(ItemsContenxt);
-    const _onClick = (index: number) =>
-        useCallback(() => dispatch(changePowerState(index)), [index]);
+    const onClick = useCallback((index: number) => () => dispatch(changePowerState(index)), []);
 
     return (
         <>
@@ -22,7 +21,7 @@ function ItemList({ items }: Props) {
                 <List key={id}>
                     <Item>{name}</Item>
                     <DisplayState power={power} />
-                    <Switch onClick={_onClick(index)} />
+                    <Switch onClick={onClick(index)} />
                 </List>
             ))}
         </>
