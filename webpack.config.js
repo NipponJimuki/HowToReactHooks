@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const MODE = process.env.NODE_ENV || 'development';
 const PRODUCTION = MODE === 'production';
@@ -20,10 +21,18 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: 'ts-loader',
+                use: [{ loader: 'ts-loader', options: { transpileOnly: true } }],
             },
         ],
     },
+    plugins: [
+        new ForkTsCheckerWebpackPlugin({
+            async: true,
+            watch: './src/App.tsx',
+            tsconfig: './tsconfig.json',
+            tslint: './tslint.json',
+        }),
+    ],
     devServer: {
         open: true,
         port: 3334,
