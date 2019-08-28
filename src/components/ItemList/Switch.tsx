@@ -6,7 +6,11 @@ type Props = {
 };
 
 function Switch({ onClick }: Props) {
-    return <button onClick={onClick}>スイッチ</button>;
+    return (
+        <button type="button" onClick={onClick}>
+            スイッチ
+        </button>
+    );
 }
 
 export default React.memo(Switch, () => true);

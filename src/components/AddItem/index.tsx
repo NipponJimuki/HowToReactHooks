@@ -1,7 +1,7 @@
 // components/AddItem/index.tsx
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { addItem, reset } from '../reducer';
-import { ItemsContenxt } from '../';
+import { ItemsContenxt } from '..';
 
 type Props = {
     disabled: boolean;
@@ -33,14 +33,12 @@ function AddItem({ disabled }: Props) {
         };
 
         window.addEventListener('keydown', onEnter);
-        if (inputEl.current) {
-            inputEl.current.focus();
-        }
+        if (inputEl.current) inputEl.current.focus();
         return () => {
             reset();
             window.removeEventListener('keydown', onEnter);
         };
-    }, [disabled]);
+    }, [disabled, dispatch]);
 
     return (
         <>
@@ -51,10 +49,14 @@ function AddItem({ disabled }: Props) {
                 disabled={disabled}
                 value={textValue}
             />
-            <button onClick={onAddItem} disabled={disabled}>
+            <button type="submit" onClick={onAddItem} disabled={disabled}>
                 追加
             </button>
-            {disabled && <button onClick={onReset}>リセット</button>}
+            {disabled && (
+                <button type="button" onClick={onReset}>
+                    リセット
+                </button>
+            )}
         </>
     );
 }

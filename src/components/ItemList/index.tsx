@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Item from './Item';
 import Switch from './Switch';
 import DisplayState from './DisplayState';
-import { ItemsContenxt } from '../';
+import { ItemsContenxt } from '..';
 import { changePowerState, ItemProps } from '../reducer';
 
 type Props = {
@@ -13,7 +13,9 @@ type Props = {
 
 function ItemList({ items }: Props) {
     const dispatch = useContext(ItemsContenxt);
-    const onClick = useCallback((index: number) => () => dispatch(changePowerState(index)), []);
+    const onClick = useCallback((index: number) => () => dispatch(changePowerState(index)), [
+        dispatch,
+    ]);
 
     return (
         <>
