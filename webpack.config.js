@@ -24,6 +24,14 @@ module.exports = {
             },
         ],
     },
+    plugins: [
+        new ForkTsCheckerWebpackPlugin({
+            async: true,
+            eslint: true,
+            watch: './src/App.tsx',
+            tsconfig: './tsconfig.json',
+        }),
+    ],
     devServer: {
         open: true,
         port: 3334,
