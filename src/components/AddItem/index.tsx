@@ -5,6 +5,8 @@ function AddItem() {
     const [items, addItem] = useState(['']);
     const [textValue, handleChange] = useState('');
     const inputEl = useRef<HTMLInputElement>(null);
+    const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value);
+    const onAddItem = (item: string) => () => addItem(prevItems => [...prevItems, item]);
 
     useEffect(() => {
         const onEnter = (e: KeyboardEvent) => {
@@ -16,22 +18,19 @@ function AddItem() {
         };
 
         window.addEventListener('keydown', onEnter);
-        if (inputEl.current) {
-            inputEl.current.focus();
-        }
+        if (inputEl.current) inputEl.current.focus();
+
         return () => {
             window.removeEventListener('keydown', onEnter);
         };
     }, []);
 
-    const _onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-        handleChange(e.target.value);
-    const _onAddItem = (item: string) => () => addItem(prevItems => [...prevItems, item]);
-
     return (
         <>
-            <input ref={inputEl} type="text" onChange={_onHandleChange} value={textValue} />
-            <button onClick={_onAddItem(textValue)}>追加</button>
+            <input ref={inputEl} type="text" onChange={onHandleChange} value={textValue} />
+            <button type="submit" onClick={onAddItem(textValue)}>
+                追加
+            </button>
             {items.join('/')}
         </>
     );
