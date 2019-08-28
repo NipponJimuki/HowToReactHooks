@@ -59,6 +59,7 @@ module.exports = {
             printWidth: 100,
             trailingComma: "all",
         }],
+        'import/no-cycle': OFF,
         'no-plusplus': OFF,
         '@typescript-eslint/explicit-function-return-type': OFF,
         '@typescript-eslint/no-explicit-any': OFF,

@@ -4,6 +4,7 @@
     "module": "ESNEXT" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
     "lib": ["es2018", "dom"],
     "experimentalDecorators": true,
+    "allowJs": true,
     "jsx": "react",
     "declaration": false,
     "sourceMap": true,
