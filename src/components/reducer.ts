@@ -30,7 +30,7 @@ type State = {
 };
 type Action = ReturnType<typeof addItem | typeof reset | typeof changePowerState>;
 
-export const initialState = {
+export const initialState: State = {
     items: [],
 };
 
