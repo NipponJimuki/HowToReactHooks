@@ -8,10 +8,10 @@ type Props = {
 };
 
 function AddItem({ onAdd, onReset, disabled }: Props) {
-    const [textValue, handleChange] = useState('');
+    const [textValue, setTextValue] = useState('');
     const inputEl = useRef<HTMLInputElement>(null);
-    const resetText = () => handleChange('');
-    const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value);
+    const resetText = () => setTextValue('');
+    const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => setTextValue(e.target.value);
     const onAddItem = () => {
         if (textValue) {
             onAdd(textValue);
@@ -25,7 +25,7 @@ function AddItem({ onAdd, onReset, disabled }: Props) {
                 const item = inputEl.current.value;
                 if (item) {
                     onAdd(item);
-                    handleChange('');
+                    resetText();
                 }
             }
         };
