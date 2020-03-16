@@ -2,18 +2,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 function AddItem() {
-    const [items, addItem] = useState(['']);
-    const [textValue, handleChange] = useState('');
+    const [items, setItem] = useState<string[]>([]);
+    const [textValue, setTextValue] = useState('');
     const inputEl = useRef<HTMLInputElement>(null);
-    const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value);
-    const onAddItem = (item: string) => () => addItem(prevItems => [...prevItems, item]);
+    const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => setTextValue(e.target.value);
+    const onAddItem = (item: string) => () => setItem(prev => [...prev, item]);
 
     useEffect(() => {
         const onEnter = (e: KeyboardEvent) => {
             if (e.keyCode === 13 && inputEl.current) {
                 const item = inputEl.current.value;
-                addItem(prevItems => [...prevItems, item]);
-                handleChange('');
+                setItem(prevItems => [...prevItems, item]);
+                setTextValue('');
             }
         };
 
