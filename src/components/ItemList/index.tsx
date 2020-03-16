@@ -1,29 +1,21 @@
 // components/ItemList/index.tsx
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Item from './Item';
 import Switch from './Switch';
 import DisplayState from './DisplayState';
 import { ItemsContenxt } from '..';
-import { changePowerState, ItemProps } from '../reducer';
 
-type Props = {
-    items: ItemProps[];
-};
-
-function ItemList({ items }: Props) {
-    const dispatch = useContext(ItemsContenxt);
-    const onClick = useCallback((index: number) => () => dispatch(changePowerState(index)), [
-        dispatch,
-    ]);
+function ItemList() {
+    const { items } = useContext(ItemsContenxt);
 
     return (
         <>
-            {items.map(({ id, name, power }, index) => (
+            {items.map(({ id, name, power }) => (
                 <List key={id}>
                     <Item>{name}</Item>
                     <DisplayState power={power} />
-                    <Switch onClick={onClick(index)} />
+                    <Switch id={id} />
                 </List>
             ))}
         </>

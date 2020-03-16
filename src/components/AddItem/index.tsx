@@ -7,16 +7,16 @@ type Props = {
     disabled: boolean;
 };
 
-function AddItem({ disabled }: Props) {
-    const dispatch = useContext(ItemsContenxt);
-    const [textValue, handleChange] = useState('');
+function useItem() {
+    const { dispatch } = useContext(ItemsContenxt);
+    const [textValue, setTextValue] = useState('');
     const inputEl = useRef<HTMLInputElement>(null);
-    const resetText = () => handleChange('');
-    const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value);
+
+    const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => setTextValue(e.target.value);
     const onAddItem = () => {
         if (textValue) {
             dispatch(addItem(textValue));
-            resetText();
+            setTextValue('');
         }
     };
     const onReset = () => dispatch(reset());
@@ -27,7 +27,7 @@ function AddItem({ disabled }: Props) {
                 const item = inputEl.current.value;
                 if (item) {
                     dispatch(addItem(item));
-                    resetText();
+                    setTextValue('');
                 }
             }
         };
@@ -35,10 +35,18 @@ function AddItem({ disabled }: Props) {
         window.addEventListener('keydown', onEnter);
         if (inputEl.current) inputEl.current.focus();
         return () => {
-            reset();
+            dispatch(reset());
             window.removeEventListener('keydown', onEnter);
         };
-    }, [disabled, dispatch]);
+        /* コンポーネントマウント時にのみ発火すればよいのでdepsを無効にする */
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    return { textValue, inputEl, onHandleChange, onAddItem, onReset };
+}
+
+function AddItem({ disabled }: Props) {
+    const { textValue, inputEl, onHandleChange, onAddItem, onReset } = useItem();
 
     return (
         <>

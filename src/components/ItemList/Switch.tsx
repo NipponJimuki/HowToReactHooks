@@ -1,11 +1,18 @@
 // components/ItemList/Switch.tsx
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
+import { changePowerState } from '../reducer';
+import { ItemsContenxt } from '..';
 
 type Props = {
-    onClick: () => void;
+    id: string;
 };
 
-function Switch({ onClick }: Props) {
+function Switch({ id }: Props) {
+    const { dispatch } = useContext(ItemsContenxt);
+    const onClick = useCallback(() => {
+        dispatch(changePowerState(id));
+    }, [id, dispatch]);
+
     return (
         <button type="button" onClick={onClick}>
             スイッチ
@@ -13,4 +20,4 @@ function Switch({ onClick }: Props) {
     );
 }
 
-export default React.memo(Switch, () => true);
+export default React.memo(Switch);

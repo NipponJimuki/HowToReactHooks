@@ -5,7 +5,7 @@ type Props = {
     power: boolean;
 };
 
-const styles = {
+const styles: React.CSSProperties = {
     width: '45px',
 };
 
