@@ -1,4 +1,5 @@
 const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const MODE = process.env.NODE_ENV || 'development';
 const PRODUCTION = MODE === 'production';
