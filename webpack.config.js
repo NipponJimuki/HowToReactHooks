@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
@@ -12,6 +11,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'build'),
+        chunkFilename: '[name].js',
         publicPath: '/build/',
     },
     resolve: {
@@ -37,6 +37,18 @@ module.exports = {
         open: true,
         port: 3334,
         publicPath: '/build/',
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /react|react-dom/,
+                    name: 'vendor',
+                    chunks: 'initial',
+                    enforce: true,
+                },
+            },
+        },
     },
     performance: { hints: false },
 };
